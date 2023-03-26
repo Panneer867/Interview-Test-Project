@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Locations Update Page</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body class="bg-dark" style="overflow-x:hidden;">
+	<div class="row d-flex justify-content-center mt-5 ">
+		<div class="col-8 mt-5">
+			<div class="col-11 mx-auto my-auto">
+				<div th:if="${session.message}" class="alert_field">
+					<div class="alert text-center py-1" th:classappend="${'alert-'+session.message.type}" role="alert">
+						<span th:text="${session.message.content}"></span>
+					</div>
+					<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+				</div>
+			</div>
+			<table class="table table-bordered table-secondary table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Table Name</th>
+						<th>Colum Name</th>
+						<th>All Cities</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="location: ${locations}">
+						<td>interview.geography_columns</td>
+						<td>city_name</td>
+						<td class="location" th:text="${location}"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+			<div class="col-sm-12 text-center">
+				<a th:href="@{/updateLocations}" class="btn btn-light update">Back to Update</a>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/webatrs/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
+	
+
+</body>
+
+</html>

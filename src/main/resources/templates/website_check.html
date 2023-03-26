@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Welcome to Home Page</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body class="bg-dark" style="overflow-x:hidden;">
+	<div class="row d-flex justify-content-center mt-5 ">
+		<div class="col-5 mt-5">
+			<div class="col-11 mx-auto my-auto">
+				<div th:if="${session.message}" class="alert_field">
+					<div class="alert text-center py-1" th:classappend="${'alert-'+session.message.type}" role="alert">
+						<span th:text="${session.message.content}"></span>
+					</div>
+					<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+				</div>
+			</div>
+			<form th:action="@{/websiteCheck}" method="post">
+				<div class="form-group row mt-3">
+
+					<div class="col-sm-12">
+						<input type="text" class="form-control" name="website" id="website"
+							placeholder="Enter Website here to be monitored" required>
+					</div>
+				</div>
+
+				<div class="form-group row mt-4">
+					<div class="col-sm-12 text-center">
+						<button type="submit" class="btn btn-light">Add</button>
+						<a th:href="@{/website/clear}" class="btn btn-light">Clear</a>
+					</div>
+				</div>
+			</form>
+
+
+			<table class="table table-bordered table-secondary table-striped table-hover mt-5">
+				<thead>
+					<tr>
+						<th>Wesites</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="website: ${websites}">
+						<td th:text="${website.website}"></td>
+						<td th:text="${website.status}"></td>
+
+					</tr>
+				</tbody>
+			</table>
+			<div th:if="${websites.size() == 0}" class="alert_field">
+				<div class="alert text-center py-1 alert-danger" role="alert">
+					<span>No Data Exists</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
+
+	<script>
+		$(document).ready(function () {
+			setInterval(function () {
+				location.reload();
+			}, 120000);
+
+		});
+	</script>
+</body>
+
+</html>
